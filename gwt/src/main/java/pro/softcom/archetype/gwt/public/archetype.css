@@ -1,0 +1,17 @@
+.customer-title {
+	font-size: large;
+	margin: 5px;
+}
+
+.customer-label {
+	width: 100px;
+}
+
+.customer-field {
+	width: 160px;
+}
+
+.customer-button {
+	margin: 5px;
+	width: 70px;
+}

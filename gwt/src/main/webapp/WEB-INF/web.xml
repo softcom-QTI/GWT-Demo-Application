@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<!-- Default page to serve -->
+	<welcome-file-list>
+		<welcome-file>hostPage</welcome-file>
+	</welcome-file-list>
+
+	<filter>
+		<filter-name>guiceFilter</filter-name>
+		<filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>guiceFilter</filter-name>
+		<url-pattern>/services/*</url-pattern>
+	</filter-mapping>
+
+	<listener>
+		<listener-class>pro.softcom.archetype.gwt.server.inject.GwtGuiceContextListener</listener-class>
+	</listener>
+
+	<security-constraint>
+		<display-name>Security Constraint</display-name>
+		<web-resource-collection>
+			<web-resource-name>Web Resource Collection URL '/*'</web-resource-name>
+			<url-pattern>/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<description>Auth Constraint Role 'member'</description>
+			<role-name>member</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<!-- defaultRealm muss z.B. im WLS konfiguriert werden -->
+	<login-config>
+		<auth-method>BASIC</auth-method>
+		<realm-name>defaultRealm</realm-name>
+	</login-config>
+
+	<security-role>
+		<role-name>member</role-name>
+	</security-role>
+
+	<servlet>
+		<servlet-name>customerServiceImpl</servlet-name>
+		<servlet-class>pro.softcom.archetype.gwt.server.GwtCustomerServiceImpl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>customerServiceImpl</servlet-name>
+		<url-pattern>/archetype/CustomerService</url-pattern>
+	</servlet-mapping>
+
+	<ejb-local-ref>
+		<ejb-ref-name>ejb/CustomerService</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<ejb-link>CustomerServiceImpl</ejb-link>
+	</ejb-local-ref>
+</web-app>

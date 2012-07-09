@@ -1,0 +1,109 @@
+@CHARSET "UTF-8";
+
+@def selectionBorderWidth 0px;
+.cellTableWidget {
+	width: 100%;
+}
+
+.cellTableFirstColumn {
+	
+}
+
+.cellTableLastColumn {
+	
+}
+
+.cellTableFooter {
+	
+}
+
+.cellTableHeader {
+	background-color: #CCCCCC;
+	border-color: white;
+	border-style: solid;
+	border-width: 0 0 1px 1px;
+	text-shadow: none;
+    color: #222222;
+    height: 27px;
+}
+
+.cellTableCell {
+	border-color: white;
+	border-style: solid;
+	border-width: 0 0 1px 1px;
+	height: 27px;
+	text-align: left;
+}
+
+@if user.agent ie6 ie7 ie8 {
+	.cellTableHeader {
+    	height: 20px;
+	}
+	.cellTableCell {
+		height: 20px;
+	}
+}
+
+.cellTableFirstColumnFooter {
+	
+}
+
+.cellTableFirstColumnHeader {
+	
+}
+
+.cellTableLastColumnFooter {
+	
+}
+
+.cellTableLastColumnHeader {
+	
+}
+
+.cellTableEvenRow {
+	background-color: #EAEAEA;
+}
+
+.cellTableEvenRowCell {
+	
+}
+
+.cellTableOddRow {
+	background-color: #F3F3F3;
+}
+
+.cellTableOddRowCell {
+	
+}
+
+.cellTableHoveredRow {
+	background-color: #D9D9D9;
+}
+
+.cellTableHoveredRowCell {
+	
+}
+
+.cellTableKeyboardSelectedRow {
+	
+}
+
+.cellTableKeyboardSelectedRowCell {
+	
+}
+
+.cellTableSelectedRow {
+	background-color: #CCCCCC;
+	color: #000000;
+}
+
+.cellTableSelectedRowCell {
+	
+}
+
+/** 
+ * The keyboard selected cell is visible over selection. 
+ */
+.cellTableKeyboardSelectedCell {
+	
+}

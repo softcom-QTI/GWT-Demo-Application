@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='archetype'>
+	<!-- Entry point class of the application -->
+	<entry-point
+		class='pro.softcom.archetype.gwt.client.base.ArchetypeEntryPoint' />
+
+	<!-- GWT Libraries -->
+	<inherits name='com.google.gwt.user.User' />
+	<inherits name='com.google.gwt.activity.Activity' />
+	<inherits name='com.google.gwt.place.Place' />
+	<inherits name="com.google.gwt.inject.Inject" />
+
+    <!-- Default theme -->
+    <inherits name='com.google.gwt.user.theme.standard.Standard'/>
+
+	<!-- Browsers for which permutations will be compiled (in this case, Internet 
+		Explorer 8 and Firefox) -->
+	<set-property name='user.agent' value='ie8,gecko1_8' />
+
+	<!-- Packages that will be visible on the client side -->
+	<source path='client' />
+	<source path='shared' />
+
+    <!-- Supported locales -->
+	<extend-property name='locale' values='en' />
+	<extend-property name='locale' values='fr' />
+
+    <!-- Default locale -->
+	<set-property-fallback name='locale' value='en' />
+
+	<!-- Name of the main CSS file -->
+	<stylesheet src='archetype.css' />
+</module>
