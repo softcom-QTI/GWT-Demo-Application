@@ -6,25 +6,23 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.inject.Inject;
 
 public abstract class ArchetypeActivity extends AbstractActivity {
 
     private EventBus eventBus;
-    private PlaceController placeController;
     private IsWidget widget;
 
-    public ArchetypeActivity(IsWidget widget, PlaceController placeController) {
-        this.placeController = placeController;
-        this.widget = widget;
-    }
+    @Inject
+    private PlaceController placeController;
 
     public final void start(AcceptsOneWidget panel, EventBus eventBus) {
         this.eventBus = eventBus;
         panel.setWidget(widget);
-        doOnStart();
+        doOnStart(panel);
     }
 
-    public abstract void doOnStart();
+    public abstract void doOnStart(AcceptsOneWidget panel);
 
     public EventBus getEventBus() {
         return eventBus;
@@ -32,6 +30,10 @@ public abstract class ArchetypeActivity extends AbstractActivity {
 
     public void goTo(Place place) {
         placeController.goTo(place);
+    }
+
+    public Place getCurrentPlace() {
+        return placeController.getWhere();
     }
 
 }

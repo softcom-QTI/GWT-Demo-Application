@@ -1,30 +1,28 @@
 package pro.softcom.archetype.gwt.client.customer.edit;
 
 import pro.softcom.archetype.gwt.client.base.ArchetypeActivity;
-import pro.softcom.archetype.gwt.client.base.ClientFactory;
 import pro.softcom.archetype.gwt.client.place.CustomerEditPlace;
 import pro.softcom.archetype.gwt.client.place.CustomerSearchPlace;
 import pro.softcom.archetype.gwt.shared.model.CustomerModel;
 import pro.softcom.archetype.gwt.shared.rpc.GwtCustomerServiceAsync;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.inject.Inject;
 
 public class CustomerEditActivity extends ArchetypeActivity implements CustomerEditView.Presenter {
 
+    @Inject
     private CustomerEditView customerView;
+
+    @Inject
     private GwtCustomerServiceAsync customerService;
 
-    public CustomerEditActivity(CustomerEditPlace place, ClientFactory clientFactory) {
-        super(clientFactory.getCustomerEditView(), clientFactory.getPlaceController());
-        this.customerView = clientFactory.getCustomerEditView();
-        this.customerService = clientFactory.gwtCustomerServiceAsync();
-        customerView.setPresenter(this);
-        customerView.setCustomer(place.getCustomer());
-    }
-
     @Override
-    public void doOnStart() {
-        // Do nothing
+    public void doOnStart(AcceptsOneWidget panel) {
+        panel.setWidget(customerView);
+        customerView.setPresenter(this);
+        customerView.setCustomer(((CustomerEditPlace) getCurrentPlace()).getCustomer());
     }
 
     public void saveCustomer(CustomerModel customer) {

@@ -13,14 +13,17 @@ import com.google.inject.Inject;
 public class ArchetypeActivityMapper implements ActivityMapper {
 
     @Inject
-    private ClientFactory clientFactory;
+    private ActivityAsyncProxyProvider<CustomerEditActivity> customerEditActivityProvider;
+
+    @Inject
+    private ActivityAsyncProxyProvider<CustomerSearchActivity> customerSearchActivityProvider;
 
     public Activity getActivity(Place place) {
         if (place instanceof CustomerSearchPlace) {
-            return new CustomerSearchActivity((CustomerSearchPlace) place, clientFactory);
+            return customerSearchActivityProvider.get();
         }
         if (place instanceof CustomerEditPlace) {
-            return new CustomerEditActivity((CustomerEditPlace) place, clientFactory);
+            return customerEditActivityProvider.get();
         }
         return null;
     }
