@@ -7,6 +7,9 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
+/**
+ * This class is a component in which messages can be displayed, with specific levels (error, warn, info).
+ */
 public class MessagePanel extends Composite {
 
     interface MessagePanelUiBinder extends UiBinder<Widget, MessagePanel> {

@@ -1,7 +1,6 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.google.gwt.user.cellview.client"
-	ui:generateLocales="default" xmlns:d="urn:import:com.google.gwt.dom.client">
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:p="urn:import:pro.softcom.archetype.gwt.client.lib.table">
 
 	<ui:with field='i18n'
 		type='pro.softcom.archetype.gwt.client.customer.search.CustomerSearchI18n' />
@@ -23,7 +22,6 @@
 			<g:Button ui:field="create" text="{i18n.create}" styleName="customer-button" />
 			<g:Button ui:field="search" text="{i18n.search}" styleName="customer-button" />
 		</g:HorizontalPanel>
-		<c:CellTable ui:field="customers" />
-		<c:SimplePager ui:field="pager" location="CENTER" />
+		<p:ArchetypeCellTable ui:field="customers" />
 	</g:VerticalPanel>
 </ui:UiBinder>

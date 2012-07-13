@@ -36,6 +36,33 @@ public class ArchetypeBaseView extends Composite {
     interface ArchetypeBaseViewUiBinder extends UiBinder<Widget, ArchetypeBaseView> {
     }
 
+    /**
+     * Custom handler that will allow the highlighting of the currently selected menu item.
+     */
+    private class ArchetypeMenuHighlightHandler implements HighlightMenuHandler {
+    
+        private Map<String, MenuItem> menuItems = new HashMap<String, MenuItem>();
+    
+        @Override
+        public void onHighlight(HighlightMenuEvent event) {
+            // Remove "highlight" style on all menu items
+            for (MenuItem menuItem : menuItems.values()) {
+                menuItem.removeStyleDependentName("highlighted");
+            }
+    
+            // Highlight the given menu item
+            MenuItem menuItem = menuItems.get(event.getMenuIdentifier());
+    
+            if (menuItem != null) {
+                menuItem.addStyleDependentName("highlighted");
+            }
+        }
+    
+        public void addMenuItem(String placeTokenName, MenuItem menuItem) {
+            menuItems.put(placeTokenName, menuItem);
+        }
+    }
+
     private static ArchetypeBaseViewUiBinder uiBinder = GWT.create(ArchetypeBaseViewUiBinder.class);
 
     private ArchetypeBaseI18n constants = GWT.create(ArchetypeBaseI18n.class);
@@ -91,6 +118,15 @@ public class ArchetypeBaseView extends Composite {
         createPlanningMenu(placeController, handler);
     }
 
+    /**
+     * Return the panel where the content of the page will be displayed.
+     *
+     * @return
+     */
+    public HasOneWidget getContentPanel() {
+        return contentPanel;
+    }
+
     private void createHomeMenu(final PlaceController placeController, ArchetypeMenuHighlightHandler handler) {
         MenuItem menuItem = new MenuItem(constants.menuHome(), new Command() {
             @Override
@@ -98,9 +134,9 @@ public class ArchetypeBaseView extends Composite {
                 // TODO
             }
         });
-
+    
         menuBar.addItem(menuItem);
-
+    
         handler.addMenuItem(ArchetypeMenuConstants.HOME, menuItem);
     }
 
@@ -111,9 +147,9 @@ public class ArchetypeBaseView extends Composite {
                 placeController.goTo(new CustomerSearchPlace());
             }
         });
-
+    
         menuBar.addItem(menuItem);
-
+    
         handler.addMenuItem(ArchetypeMenuConstants.EMPLOYEES, menuItem);
     }
 
@@ -124,9 +160,9 @@ public class ArchetypeBaseView extends Composite {
                 placeController.goTo(new CustomerEditPlace(new CustomerModel()));
             }
         });
-
+    
         menuBar.addItem(menuItem);
-
+    
         handler.addMenuItem(ArchetypeMenuConstants.SKILLS, menuItem);
     }
 
@@ -137,9 +173,9 @@ public class ArchetypeBaseView extends Composite {
                 // TODO
             }
         });
-
+    
         menuBar.addItem(menuItem);
-
+    
         handler.addMenuItem(ArchetypeMenuConstants.PROJECTS, menuItem);
     }
 
@@ -150,45 +186,9 @@ public class ArchetypeBaseView extends Composite {
                 // TODO
             }
         });
-
+    
         menuBar.addItem(menuItem);
-
+    
         handler.addMenuItem(ArchetypeMenuConstants.PLANNING, menuItem);
-    }
-
-    /**
-     * Return the panel where the content of the page will be displayed.
-     *
-     * @return
-     */
-    public HasOneWidget getContentPanel() {
-        return contentPanel;
-    }
-
-    /**
-     * Custom handler that will allow the highlighting of the currently selected menu item.
-     */
-    private class ArchetypeMenuHighlightHandler implements HighlightMenuHandler {
-
-        private Map<String, MenuItem> menuItems = new HashMap<String, MenuItem>();
-
-        @Override
-        public void onHighlight(HighlightMenuEvent event) {
-            // Remove "highlight" style on all menu items
-            for (MenuItem menuItem : menuItems.values()) {
-                menuItem.removeStyleDependentName("highlighted");
-            }
-
-            // Highlight the given menu item
-            MenuItem menuItem = menuItems.get(event.getMenuIdentifier());
-
-            if (menuItem != null) {
-                menuItem.addStyleDependentName("highlighted");
-            }
-        }
-
-        public void addMenuItem(String placeTokenName, MenuItem menuItem) {
-            menuItems.put(placeTokenName, menuItem);
-        }
     }
 }

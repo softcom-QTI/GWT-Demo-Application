@@ -1,6 +1,5 @@
 package pro.softcom.archetype.gwt.client.inject;
 
-import pro.softcom.archetype.gwt.client.base.ArchetypeActivityMapper;
 import pro.softcom.archetype.gwt.client.customer.edit.CustomerEditView;
 import pro.softcom.archetype.gwt.client.customer.edit.CustomerEditViewImpl;
 import pro.softcom.archetype.gwt.client.customer.search.CustomerSearchView;
@@ -8,8 +7,6 @@ import pro.softcom.archetype.gwt.client.customer.search.CustomerSearchViewImpl;
 import pro.softcom.archetype.gwt.client.place.ArchetypePlaceHistoryMapper;
 import pro.softcom.archetype.gwt.client.place.CustomerSearchPlace;
 
-import com.google.gwt.activity.shared.ActivityManager;
-import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.inject.client.AbstractGinModule;
@@ -25,8 +22,6 @@ public class ArchetypeModule extends AbstractGinModule {
     protected void configure() {
         // Common bindings
         bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
-        //        bind(ArchetypeActivityMapper.class).in(Singleton.class);
-        bind(ActivityMapper.class).to(ArchetypeActivityMapper.class).in(Singleton.class);
         bind(PlaceHistoryMapper.class).to(ArchetypePlaceHistoryMapper.class).in(Singleton.class);
 
         // Views
@@ -50,10 +45,4 @@ public class ArchetypeModule extends AbstractGinModule {
         return new PlaceController(eventBus);
     }
 
-    @Provides
-    @Singleton
-    public ActivityManager getActivityManager(ActivityMapper activityMapper, EventBus eventBus) {
-        ActivityManager activityManager = new ActivityManager(activityMapper, eventBus);
-        return activityManager;
-    }
 }
