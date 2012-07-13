@@ -4,6 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import pro.softcom.archetype.gwt.client.lib.event.LoadingEvent;
+import pro.softcom.archetype.gwt.client.lib.event.MessageEvent;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -46,6 +47,9 @@ public abstract class ArchetypeAsyncCallback<T> implements AsyncCallback<T> {
 
         // Log the error
         logger.log(Level.SEVERE, "An exception occured in the GWT-RPC remote call", caught);
+
+        // Fire a message event to warn the user that an error occurred
+        eventBus.fireEvent(new MessageEvent("An exception occured in the GWT-RPC remote call : " + caught.getMessage(), pro.softcom.archetype.gwt.client.lib.panel.MessagePanel.Level.ERROR));
 
         // Delegate the "on failure" to the custom implementation 
         doOnFailure(caught);

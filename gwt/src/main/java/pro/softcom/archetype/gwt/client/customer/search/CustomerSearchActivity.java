@@ -31,10 +31,6 @@ public class CustomerSearchActivity extends ArchetypeActivity implements Custome
             public void doOnSuccess(List<CustomerModel> result) {
                 customerView.setCustomers(result);
             }
-
-            public void doOnFailure(Throwable caught) {
-                customerView.setMessage("An error occured during the search ! " + caught.getMessage());
-            }
         });
     }
 

@@ -12,7 +12,20 @@ import com.google.gwt.event.shared.HandlerRegistration;
 
 public class MessageEvent extends GwtEvent<MessageEvent.Handler> {
 
+    public interface Handler extends EventHandler {
+        void onMessageEvent(MessageEvent event);
+    }
+
+    private static final Type<Handler> TYPE = new Type<Handler>();
     private final ArrayList<Message> messages = new ArrayList<Message>();
+
+    public MessageEvent() {
+        this(null, null);
+    }
+
+    public MessageEvent(String text, Level level) {
+        addMessage(text, level);
+    }
 
     public void addMessage(String text, Level level) {
         messages.add(new Message(text, level));
@@ -29,12 +42,6 @@ public class MessageEvent extends GwtEvent<MessageEvent.Handler> {
     public ArrayList<Message> getMessages() {
         return messages;
     }
-
-    public interface Handler extends EventHandler {
-        void onMessageEvent(MessageEvent event);
-    }
-
-    private static final Type<Handler> TYPE = new Type<Handler>();
 
     public static HandlerRegistration register(EventBus eventBus, MessageEvent.Handler handler) {
         return eventBus.addHandler(TYPE, handler);

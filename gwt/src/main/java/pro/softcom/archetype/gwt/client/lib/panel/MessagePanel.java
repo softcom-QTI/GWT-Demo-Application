@@ -1,10 +1,18 @@
 package pro.softcom.archetype.gwt.client.lib.panel;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.safehtml.shared.SafeHtml;
+import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -58,12 +66,45 @@ public class MessagePanel extends Composite {
 
     private static MessagePanelUiBinder uiBinder = GWT.create(MessagePanelUiBinder.class);
 
+    @UiField
+    VerticalPanel messagePanel;
+
     public MessagePanel() {
         initWidget(uiBinder.createAndBindUi(this));
     }
 
     public void addMessages(List<Message> messages) {
-        // TODO
+        Map<Level, List<Message>> messagesByLevel = new HashMap<Level, List<Message>>();
+
+        // Sort the messages by level
+        for (Message message : messages) {
+            if (messagesByLevel.get(message.getLevel()) == null) {
+                messagesByLevel.put(message.getLevel(), new ArrayList<Message>());
+            }
+            messagesByLevel.get(message.getLevel()).add(message);
+        }
+
+        // Create blocks of messages by level
+        for (Entry<Level, List<Message>> entry : messagesByLevel.entrySet()) {
+            formatMessages(entry.getValue()); // TODO
+        }
     }
 
+    /**
+     * Format the messages as a HTML list.
+     *
+     * @param messages The messages to display.
+     * @return The HTML String containing the messages.
+     */
+    private SafeHtml formatMessages(List<Message> messages) {
+        SafeHtmlBuilder builder = new SafeHtmlBuilder();
+        builder.appendHtmlConstant("<ul>");
+        for (Message message : messages) {
+            builder.appendHtmlConstant("<li>");
+            builder.appendEscaped(message.getText());
+            builder.appendHtmlConstant("</li>");
+        }
+        builder.appendHtmlConstant("</ul>");
+        return builder.toSafeHtml();
+    }
 }
