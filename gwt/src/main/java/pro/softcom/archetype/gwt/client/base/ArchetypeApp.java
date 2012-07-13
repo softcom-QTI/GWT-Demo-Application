@@ -8,7 +8,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.user.client.ui.HasWidgets;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.inject.Inject;
 
 public class ArchetypeApp {
@@ -23,6 +22,9 @@ public class ArchetypeApp {
     @Inject
     private EventBus eventBus;
 
+    @Inject
+    private ArchetypeBaseView archetypeBaseView;
+
     public void run(HasWidgets root) {
         GWT.setUncaughtExceptionHandler(new GWT.UncaughtExceptionHandler() {
             public void onUncaughtException(Throwable e) {
@@ -30,15 +32,12 @@ public class ArchetypeApp {
             }
         });
 
-        // This is the root panel that will contain the different views
-        SimplePanel panel = new SimplePanel();
-
-        ActivityManager mainActivityManager = new ActivityManager(archetypeActivityMapper, eventBus);
-        mainActivityManager.setDisplay(panel);
+        ActivityManager activityManager = new ActivityManager(archetypeActivityMapper, eventBus);
+        activityManager.setDisplay(archetypeBaseView.getContentPanel());
 
         // Browser history integration
         placeHistoryHandler.handleCurrentHistory();
 
-        root.add(panel);
+        root.add(archetypeBaseView);
     }
 }
