@@ -1,1 +1,11 @@
 target/
+
+ejb/.classpath
+
+ejb/.project
+
+gwt/.classpath
+
+gwt/.project
+
+gwt/.settings/com.google.gdt.eclipse.core.prefs
