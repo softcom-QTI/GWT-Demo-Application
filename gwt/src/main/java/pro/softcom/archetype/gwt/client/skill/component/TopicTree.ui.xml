@@ -1,0 +1,9 @@
+<!DOCTYPE ui:UiBinder>
+<ui:UiBinder 
+	xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" 
+	xmlns:c="urn:import:com.google.gwt.user.cellview.client">
+	<g:HTMLPanel>
+		<c:CellTree ui:field="cellTree" />
+	</g:HTMLPanel>
+</ui:UiBinder>

@@ -6,6 +6,8 @@ import pro.softcom.archetype.gwt.client.customer.search.CustomerSearchView;
 import pro.softcom.archetype.gwt.client.customer.search.CustomerSearchViewImpl;
 import pro.softcom.archetype.gwt.client.place.ArchetypePlaceHistoryMapper;
 import pro.softcom.archetype.gwt.client.place.CustomerSearchPlace;
+import pro.softcom.archetype.gwt.client.skill.manage.SkillManageView;
+import pro.softcom.archetype.gwt.client.skill.manage.SkillManageViewImpl;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
@@ -25,6 +27,7 @@ public class ArchetypeModule extends AbstractGinModule {
         bind(PlaceHistoryMapper.class).to(ArchetypePlaceHistoryMapper.class).in(Singleton.class);
 
         // Views
+        bind(SkillManageView.class).to(SkillManageViewImpl.class).in(Singleton.class);
         bind(CustomerSearchView.class).to(CustomerSearchViewImpl.class).in(Singleton.class);
         bind(CustomerEditView.class).to(CustomerEditViewImpl.class).in(Singleton.class);
     }

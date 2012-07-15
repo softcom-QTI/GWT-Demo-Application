@@ -8,9 +8,7 @@ import pro.softcom.archetype.gwt.client.lib.event.HighlightMenuHandler;
 import pro.softcom.archetype.gwt.client.lib.event.LoadingEvent;
 import pro.softcom.archetype.gwt.client.lib.event.MessageEvent;
 import pro.softcom.archetype.gwt.client.lib.panel.MessagePanel;
-import pro.softcom.archetype.gwt.client.place.CustomerEditPlace;
-import pro.softcom.archetype.gwt.client.place.CustomerSearchPlace;
-import pro.softcom.archetype.gwt.shared.model.CustomerModel;
+import pro.softcom.archetype.gwt.client.place.SkillManagePlace;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Display;
@@ -144,7 +142,7 @@ public class ArchetypeBaseView extends Composite {
         MenuItem manageSkillsMenuItem = new MenuItem(constants.menuManageSkills(), new Command() {
             @Override
             public void execute() {
-                placeController.goTo(new CustomerSearchPlace());
+                placeController.goTo(new SkillManagePlace());
             }
         });
     
