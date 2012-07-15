@@ -5,10 +5,11 @@ package pro.softcom.archetype.gwt.client.base;
  */
 public interface ArchetypeMenuConstants {
 
-    String HOME = "home";
-    String EMPLOYEES = "employees";
-    String SKILLS = "skills";
-    String PROJECTS = "projects";
-    String PLANNING = "planning";
+    String MANAGE = "manage";
+    String MANAGE_EMPLOYEES = "manage_employees";
+    String MANAGE_PROJECTS = "manage_projects";
+    String MANAGE_SKILLS = "manage_skills";
+    String MANAGE_GROUPS = "manage_groups";
+    String MANAGE_FUNCTIONS = "manage_functions";
 
 }

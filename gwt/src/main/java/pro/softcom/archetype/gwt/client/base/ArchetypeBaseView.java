@@ -111,11 +111,10 @@ public class ArchetypeBaseView extends Composite {
         HighlightMenuEvent.register(eventBus, handler);
 
         // Create the menu bar items
-        createHomeMenu(placeController, handler);
-        createEmployeesMenu(placeController, handler);
-        createSkillsMenu(placeController, handler);
-        createProjectsMenu(placeController, handler);
-        createPlanningMenu(placeController, handler);
+        createSearchMenu(placeController, handler);
+        createManageMenu(placeController, handler);
+        createHrMenu(placeController, handler);
+        createAdminMenu(placeController, handler);
     }
 
     /**
@@ -127,68 +126,42 @@ public class ArchetypeBaseView extends Composite {
         return contentPanel;
     }
 
-    private void createHomeMenu(final PlaceController placeController, ArchetypeMenuHighlightHandler handler) {
-        MenuItem menuItem = new MenuItem(constants.menuHome(), new Command() {
-            @Override
-            public void execute() {
-                // TODO
-            }
-        });
+    private void createSearchMenu(final PlaceController placeController, ArchetypeMenuHighlightHandler handler) {
+//        MenuItem menuItem = new MenuItem(constants.menuSearchXy(), new Command() {
+//            @Override
+//            public void execute() {
+//                // TODO
+//            }
+//        });
     
-        menuBar.addItem(menuItem);
+        MenuBar searchMenuBar = new MenuBar(true);
+        menuBar.addItem(constants.menuSearch(), searchMenuBar);
     
-        handler.addMenuItem(ArchetypeMenuConstants.HOME, menuItem);
+//        handler.addMenuItem(ArchetypeMenuConstants.XY, menuItem);
     }
 
-    private void createEmployeesMenu(final PlaceController placeController, ArchetypeMenuHighlightHandler handler) {
-        MenuItem menuItem = new MenuItem(constants.menuEmployees(), new Command() {
+    private void createManageMenu(final PlaceController placeController, ArchetypeMenuHighlightHandler handler) {
+        MenuItem manageSkillsMenuItem = new MenuItem(constants.menuManageSkills(), new Command() {
             @Override
             public void execute() {
                 placeController.goTo(new CustomerSearchPlace());
             }
         });
     
-        menuBar.addItem(menuItem);
+        MenuBar manageMenuBar = new MenuBar(true);
+        manageMenuBar.addItem(manageSkillsMenuItem);
+        menuBar.addItem(constants.menuManage(), manageMenuBar);
     
-        handler.addMenuItem(ArchetypeMenuConstants.EMPLOYEES, menuItem);
+        handler.addMenuItem(ArchetypeMenuConstants.MANAGE_SKILLS, manageSkillsMenuItem);
     }
 
-    private void createSkillsMenu(final PlaceController placeController, ArchetypeMenuHighlightHandler handler) {
-        MenuItem menuItem = new MenuItem(constants.menuSkills(), new Command() {
-            @Override
-            public void execute() {
-                placeController.goTo(new CustomerEditPlace(new CustomerModel()));
-            }
-        });
-    
-        menuBar.addItem(menuItem);
-    
-        handler.addMenuItem(ArchetypeMenuConstants.SKILLS, menuItem);
+    private void createHrMenu(final PlaceController placeController, ArchetypeMenuHighlightHandler handler) {
+        MenuBar hrMenuBar = new MenuBar(true);
+        menuBar.addItem(constants.menuHr(), hrMenuBar);
     }
 
-    private void createProjectsMenu(final PlaceController placeController, ArchetypeMenuHighlightHandler handler) {
-        MenuItem menuItem = new MenuItem(constants.menuProjects(), new Command() {
-            @Override
-            public void execute() {
-                // TODO
-            }
-        });
-    
-        menuBar.addItem(menuItem);
-    
-        handler.addMenuItem(ArchetypeMenuConstants.PROJECTS, menuItem);
-    }
-
-    private void createPlanningMenu(final PlaceController placeController, ArchetypeMenuHighlightHandler handler) {
-        MenuItem menuItem = new MenuItem(constants.menuPlanning(), new Command() {
-            @Override
-            public void execute() {
-                // TODO
-            }
-        });
-    
-        menuBar.addItem(menuItem);
-    
-        handler.addMenuItem(ArchetypeMenuConstants.PLANNING, menuItem);
+    private void createAdminMenu(final PlaceController placeController, ArchetypeMenuHighlightHandler handler) {
+        MenuBar adminMenuBar = new MenuBar(true);
+        menuBar.addItem(constants.menuAdmin(), adminMenuBar);
     }
 }
