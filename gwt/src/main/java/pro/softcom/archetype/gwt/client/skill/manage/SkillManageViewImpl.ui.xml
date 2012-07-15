@@ -6,5 +6,7 @@
 
 	<ui:with field='i18n'
 		type='pro.softcom.archetype.gwt.client.skill.manage.SkillManageI18n' />
-
+	
+	<g:HTMLPanel>
+	</g:HTMLPanel>
 </ui:UiBinder>
