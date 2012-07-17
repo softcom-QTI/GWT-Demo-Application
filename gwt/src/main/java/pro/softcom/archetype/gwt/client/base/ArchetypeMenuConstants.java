@@ -11,5 +11,8 @@ public interface ArchetypeMenuConstants {
     String MANAGE_SKILLS = "manage_skills";
     String MANAGE_GROUPS = "manage_groups";
     String MANAGE_FUNCTIONS = "manage_functions";
+	String SEARCH = "search";
+	String SEARCH_COLLABORATORS = "search_collaborators";
+	String HOME = "home";
 
 }

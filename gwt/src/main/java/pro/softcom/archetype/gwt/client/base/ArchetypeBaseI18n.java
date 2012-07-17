@@ -12,6 +12,7 @@ public interface ArchetypeBaseI18n extends Constants {
     String subtitle();
 
     String menuSearch();
+    String menuSearchCollaborators();
 
     String menuManage();
     String menuManageEmployees();
@@ -23,6 +24,8 @@ public interface ArchetypeBaseI18n extends Constants {
     String menuHr();
 
     String menuAdmin();
+
+	String menuHome();
 
 
 }

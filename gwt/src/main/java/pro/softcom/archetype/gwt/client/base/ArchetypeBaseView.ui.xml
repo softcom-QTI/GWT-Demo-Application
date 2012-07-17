@@ -1,6 +1,7 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
-	xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:p="urn:import:pro.softcom.archetype.gwt.client.lib.panel">
+	xmlns:g='urn:import:com.google.gwt.user.client.ui' 
+	xmlns:p="urn:import:pro.softcom.archetype.gwt.client.lib.panel">
 
 	<ui:with type="pro.softcom.archetype.gwt.client.style.ArchetypeResources"
 		field="res" />
@@ -22,7 +23,7 @@
 					</div>
 				</div>
 				<div class='headerMenu'>
-					<g:MenuBar ui:field="menuBar" />
+					<g:MenuBar ui:field="mainMenuBar" />
 				</div>
 
 				<g:VerticalPanel stylePrimaryName="loading">
