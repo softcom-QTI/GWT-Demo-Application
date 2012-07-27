@@ -1,16 +1,12 @@
 package pro.softcom.archetype.gwt.client.base;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import pro.softcom.archetype.gwt.client.lib.event.HighlightMenuEvent;
-import pro.softcom.archetype.gwt.client.lib.event.HighlightMenuHandler;
 import pro.softcom.archetype.gwt.client.lib.event.LoadingEvent;
 import pro.softcom.archetype.gwt.client.lib.event.MessageEvent;
 import pro.softcom.archetype.gwt.client.lib.menu.SoftcomMenuBar;
 import pro.softcom.archetype.gwt.client.lib.menu.SoftcomMenuItem;
 import pro.softcom.archetype.gwt.client.lib.panel.MessagePanel;
 import pro.softcom.archetype.gwt.client.place.SkillManagePlace;
+import pro.softcom.archetype.gwt.client.style.ArchetypeResources;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.NativeEvent;
@@ -26,7 +22,7 @@ import com.google.gwt.user.client.Event.NativePreviewHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasOneWidget;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.MenuBar;
+import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -103,33 +99,6 @@ public class ArchetypeBaseView extends Composite {
 	interface ArchetypeBaseViewUiBinder extends UiBinder<Widget, ArchetypeBaseView> {
     }
 
-    /**
-     * Custom handler that will allow the highlighting of the currently selected menu item.
-     */
-    private class ArchetypeMenuHighlightHandler implements HighlightMenuHandler {
-    
-        private Map<String, SoftcomMenuItem> menuItems = new HashMap<String, SoftcomMenuItem>();
-    
-        @Override
-        public void onHighlight(HighlightMenuEvent event) {
-            // Remove "highlight" style on all menu items
-            for (SoftcomMenuItem menuItem : menuItems.values()) {
-                menuItem.removeStyleDependentName("highlighted");
-            }
-    
-            // Highlight the given menu item
-            SoftcomMenuItem menuItem = menuItems.get(event.getMenuIdentifier());
-    
-            if (menuItem != null) {
-                menuItem.addStyleDependentName("highlighted");
-            }
-        }
-    
-        public void addMenuItem(String placeTokenName, SoftcomMenuItem menuItem) {
-            menuItems.put(placeTokenName, menuItem);
-        }
-    }
-
     private static ArchetypeBaseViewUiBinder uiBinder = GWT.create(ArchetypeBaseViewUiBinder.class);
 
     private ArchetypeBaseI18n constants = GWT.create(ArchetypeBaseI18n.class);
@@ -146,10 +115,6 @@ public class ArchetypeBaseView extends Composite {
 	@UiField(provided = true)
 	SoftcomMenuBar mainMenuBar;
 	
-	/*
-	 * Home Menu Bar
-	 */
-	private SoftcomMenuBar homeMenuBar;
 	/*
 	 * Search Menu Bar
 	 */
@@ -171,13 +136,13 @@ public class ArchetypeBaseView extends Composite {
 	private SoftcomMenuItem homeMenuItem;
 
 	// Search Menuitems
-	private SoftcomMenuItem searchMenuItem;
+	private MenuItem searchMenuItem;
 	private SoftcomMenuItem searchCollaboratorsMenuItem;
 	private SoftcomMenuItem searchProjectsMenuItem;
 	private SoftcomMenuItem searchSkillsMenuItem;
 
 	// Manage Menuitems
-	private SoftcomMenuItem manageMenuItem;
+	private MenuItem manageMenuItem;
 	private SoftcomMenuItem manageCollaboratorsMenuItem;
 	private SoftcomMenuItem manageProjectsMenuItem;
 	private SoftcomMenuItem manageSkillsMenuItem;
@@ -185,13 +150,13 @@ public class ArchetypeBaseView extends Composite {
 	private SoftcomMenuItem manageFunctionsMenuItem;
 
 	// HR Menuitems
-	private SoftcomMenuItem hrMenuItem;
+	private MenuItem hrMenuItem;
 	private SoftcomMenuItem hrEvaluationsMenuItem;
 	private SoftcomMenuItem hrEducationMenuItem;
 	private SoftcomMenuItem hrProfileCreationMenuItem;
 
 	// Admin Menuitems
-	private SoftcomMenuItem adminMenuItem;
+	private MenuItem adminMenuItem;
 	private SoftcomMenuItem adminNewsMenuItem;
     
 
@@ -204,7 +169,26 @@ public class ArchetypeBaseView extends Composite {
     public ArchetypeBaseView(final PlaceController placeController, EventBus eventBus) {
 		menuPlaceController = placeController;
 
+		initMainMenu();
+
+		// Menu Home
+		initHomeMenu();
+
+		// Menu Search
+		initSearchMenu();
+
+		// Menu Manage
+		initManageMenu();
+
+		// Menu HR
+		initHRMenu();
+
+		// Menu Admin
+		initAdminMenu();
+
 		initWidget(uiBinder.createAndBindUi(this));
+
+        Event.addNativePreviewHandler(new MenuShortcutsHandler());
 
         // Hide the loading image by default
         loading.getElement().getStyle().setDisplay(Display.NONE);
@@ -228,29 +212,6 @@ public class ArchetypeBaseView extends Composite {
                 messagePanel.addMessages(event.getMessages());
             }
         });
-
-        // Create the handler for the menu highlighting
-        ArchetypeMenuHighlightHandler handler = new ArchetypeMenuHighlightHandler();
-        HighlightMenuEvent.register(eventBus, handler);
-
-		Event.addNativePreviewHandler(new MenuShortcutsHandler());
-
-		initMainMenu(handler);
-
-		// Menu Home
-		initHomeMenu(handler);
-
-		// Menu Search
-		initSearchMenu(handler);
-
-		// Menu Manage
-		initManageMenu(handler);
-
-		// Menu HR
-		initHRMenu(handler);
-
-		// Menu Admin
-		initAdminMenu(handler);
     }
 
     /**
@@ -262,27 +223,26 @@ public class ArchetypeBaseView extends Composite {
         return contentPanel;
     }
 
-    private void initMainMenu(ArchetypeMenuHighlightHandler handler) {
+    private void initMainMenu() {
     	mainMenuBar = new SoftcomMenuBar();
 		mainMenuBar.setAutoOpen(true);
 		mainMenuBar.setVisible(true);
     }
 
-    private void initHomeMenu(ArchetypeMenuHighlightHandler handler) {
-    	homeMenuBar = new SoftcomMenuBar(true);
-    	
-        homeMenuItem = new SoftcomMenuItem(constants.menuHome(), new Command() {
+    private void initHomeMenu() {
+    	homeMenuItem = new SoftcomMenuItem(constants.menuHome(), new Command() {
             @Override
             public void execute() {
             	 menuPlaceController.goTo(new SkillManagePlace());
             }
         });
-		setHomeMenuItem(homeMenuBar.addItem(homeMenuItem, "Ctrl+Shift+H"));
-		handler.addMenuItem(ArchetypeMenuConstants.HOME, homeMenuItem);
+		setHomeMenuItem(mainMenuBar.addItem(homeMenuItem, "Ctrl+Shift+H", ArchetypeResources.resources().logo()));
     }
 
-    private void initSearchMenu(ArchetypeMenuHighlightHandler handler) {
+    private void initSearchMenu() {
     	searchMenuBar = new SoftcomMenuBar(true);
+    	searchMenuBar.setAutoOpen(true);
+    	searchMenuBar.setVisible(true);
     	
     	searchCollaboratorsMenuItem = new SoftcomMenuItem(constants.menuSearchCollaborators(), new Command() {
             @Override
@@ -290,16 +250,11 @@ public class ArchetypeBaseView extends Composite {
                 menuPlaceController.goTo(new SkillManagePlace());
             }
         });
-		setSearchCollaboratorsMenuItem(searchMenuBar.addItem(searchCollaboratorsMenuItem, "Ctrl+Shift+Q"));
-//
+		setSearchCollaboratorsMenuItem(searchMenuBar.addItem(searchCollaboratorsMenuItem, "Ctrl+Shift+Q", null));
 		setSearchMenuItem(mainMenuBar.addItem(constants.menuSearch(), searchMenuBar));
-        
-
-		handler.addMenuItem(ArchetypeMenuConstants.SEARCH_COLLABORATORS, searchCollaboratorsMenuItem);
-		handler.addMenuItem(ArchetypeMenuConstants.SEARCH, searchMenuItem);
     }
 
-    private void initManageMenu(ArchetypeMenuHighlightHandler handler) {
+    private void initManageMenu() {
     	SoftcomMenuItem manageSkillsMenuItem = new SoftcomMenuItem(constants.menuManageSkills(), new Command() {
             @Override
             public void execute() {
@@ -307,20 +262,18 @@ public class ArchetypeBaseView extends Composite {
             }
         });
     
-        MenuBar manageMenuBar = new MenuBar(true);
+    	manageMenuBar = new SoftcomMenuBar(true);
         manageMenuBar.addItem(manageSkillsMenuItem);
         mainMenuBar.addItem(constants.menuManage(), manageMenuBar);
-    
-        handler.addMenuItem(ArchetypeMenuConstants.MANAGE_SKILLS, manageSkillsMenuItem);
     }
 
-    private void initHRMenu(ArchetypeMenuHighlightHandler handler) {
-        MenuBar hrMenuBar = new MenuBar(true);
+    private void initHRMenu() {
+        hrMenuBar = new SoftcomMenuBar(true);
         mainMenuBar.addItem(constants.menuHr(), hrMenuBar);
     }
 
-    private void initAdminMenu(ArchetypeMenuHighlightHandler handler) {
-        MenuBar adminMenuBar = new MenuBar(true);
+    private void initAdminMenu() {
+        adminMenuBar = new SoftcomMenuBar(true);
         mainMenuBar.addItem(constants.menuAdmin(), adminMenuBar);
     }
 	public SoftcomMenuBar getMainMenuBar() {
@@ -329,14 +282,6 @@ public class ArchetypeBaseView extends Composite {
 
 	public void setMainMenuBar(SoftcomMenuBar mainMenuBar) {
 		this.mainMenuBar = mainMenuBar;
-	}
-
-	public SoftcomMenuBar getHomeMenuBar() {
-		return homeMenuBar;
-	}
-
-	public void setHomeMenuBar(SoftcomMenuBar homeMenuBar) {
-		this.homeMenuBar = homeMenuBar;
 	}
 
 	public SoftcomMenuBar getSearchMenuBar() {
@@ -379,11 +324,11 @@ public class ArchetypeBaseView extends Composite {
 		this.homeMenuItem = homeMenuItem;
 	}
 
-	public SoftcomMenuItem getSearchMenuItem() {
+	public MenuItem getSearchMenuItem() {
 		return searchMenuItem;
 	}
 
-	public void setSearchMenuItem(SoftcomMenuItem searchMenuItem) {
+	public void setSearchMenuItem(MenuItem searchMenuItem) {
 		this.searchMenuItem = searchMenuItem;
 	}
 
@@ -403,11 +348,11 @@ public class ArchetypeBaseView extends Composite {
 		this.searchSkillsMenuItem = searchSkillsMenuItem;
 	}
 
-	public SoftcomMenuItem getManageMenuItem() {
+	public MenuItem getManageMenuItem() {
 		return manageMenuItem;
 	}
 
-	public void setManageMenuItem(SoftcomMenuItem manageMenuItem) {
+	public void setManageMenuItem(MenuItem manageMenuItem) {
 		this.manageMenuItem = manageMenuItem;
 	}
 
@@ -452,11 +397,11 @@ public class ArchetypeBaseView extends Composite {
 		this.manageFunctionsMenuItem = manageFunctionsMenuItem;
 	}
 
-	public SoftcomMenuItem getHrMenuItem() {
+	public MenuItem getHrMenuItem() {
 		return hrMenuItem;
 	}
 
-	public void setHrMenuItem(SoftcomMenuItem hrMenuItem) {
+	public void setHrMenuItem(MenuItem hrMenuItem) {
 		this.hrMenuItem = hrMenuItem;
 	}
 
@@ -484,11 +429,11 @@ public class ArchetypeBaseView extends Composite {
 		this.hrProfileCreationMenuItem = hrProfileCreationMenuItem;
 	}
 
-	public SoftcomMenuItem getAdminMenuItem() {
+	public MenuItem getAdminMenuItem() {
 		return adminMenuItem;
 	}
 
-	public void setAdminMenuItem(SoftcomMenuItem adminMenuItem) {
+	public void setAdminMenuItem(MenuItem adminMenuItem) {
 		this.adminMenuItem = adminMenuItem;
 	}
 

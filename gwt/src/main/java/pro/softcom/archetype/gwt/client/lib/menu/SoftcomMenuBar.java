@@ -1,5 +1,6 @@
 package pro.softcom.archetype.gwt.client.lib.menu;
 
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 
@@ -67,12 +68,16 @@ public class SoftcomMenuBar extends MenuBar {
 	 * 
 	 * @param entry
 	 *            the item to be added
+	 * @param icon 
 	 * @return the {@link IpasMenuItem} object
 	 */
-	public SoftcomMenuItem addItem(MenuItem entry, String shortcut) {
+	public SoftcomMenuItem addItem(MenuItem entry, String shortcut, ImageResource icon) {
 		SoftcomMenuItem ipasItem = new SoftcomMenuItem(entry.getText(), entry.getCommand());
 		if (shortcut != null && !shortcut.equals("")) {
 			ipasItem.setShortcutKeyLabel(shortcut);
+		}
+		if (icon != null) {
+			ipasItem.setIcon(icon);
 		}
 		super.addItem(ipasItem);
 		return ipasItem;
@@ -86,8 +91,8 @@ public class SoftcomMenuBar extends MenuBar {
 	   * @param popup the menu to be cascaded from it
 	   * @return the {@link MenuItem} object created
 	   */
-	  public SoftcomMenuItem addItem(String text, SoftcomMenuBar popup) {
-	    return addItem(new SoftcomMenuItem(text, popup));
+	  public MenuItem addItem(String text, SoftcomMenuBar popup) {
+	    return super.addItem(text, popup);
 	  }
 
 	/**
