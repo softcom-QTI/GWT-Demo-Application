@@ -21,33 +21,33 @@
   
     <jta.version>1.1</jta.version>
     <jetty.version>6.1.24</jetty.version>
-    <poi.version>3.2-FINAL</poi.version>
+    <poi.version>3.16</poi.version>
     <commons-io.version>2.0.1</commons-io.version>
-    <openejb.version>3.1.4</openejb.version>
-    <hibernatevalidation.version>4.2.0.Final</hibernatevalidation.version>
+    <openejb.version>4.7.4</openejb.version>
+    <hibernatevalidation.version>6.0.1.Final</hibernatevalidation.version>
     <gwt.version>2.4.0</gwt.version>
     <maven-plugin-api.version>3.0.3</maven-plugin-api.version>
-    <log4j.version>1.2.14</log4j.version>
-    <slf4j.version>1.5.6</slf4j.version>
-    <joda-time.version>1.6.1</joda-time.version>
-    <joda-time-hibernate.version>1.1</joda-time-hibernate.version>
-    <testng.version>5.8</testng.version>
-    <dbunit.version>2.4.8</dbunit.version>
+    <log4j.version>1.2.17</log4j.version>
+    <slf4j.version>1.7.25</slf4j.version>
+    <joda-time.version>2.9.9</joda-time.version>
+    <joda-time-hibernate.version>1.4</joda-time-hibernate.version>
+    <testng.version>6.11</testng.version>
+    <dbunit.version>2.5.3</dbunit.version>
     <oval.version>1.32</oval.version>
-    <hibernate-entitymanager.version>3.4.0.GA</hibernate-entitymanager.version>
-    <geronimo-ejb_3.0_spec.version>1.0</geronimo-ejb_3.0_spec.version>
-    <geronimo-jpa_3.0_spec.version>1.1</geronimo-jpa_3.0_spec.version>
+    <hibernate-entitymanager.version>5.2.10.Final</hibernate-entitymanager.version>
+    <geronimo-ejb_3.0_spec.version>1.0.1</geronimo-ejb_3.0_spec.version>
+    <geronimo-jpa_3.0_spec.version>1.1.1</geronimo-jpa_3.0_spec.version>
     <geronimo-jta_1.0.1B_spec.version>1.1.1</geronimo-jta_1.0.1B_spec.version>
-    <geronimo-annotation_1.0_spec.version>1.0</geronimo-annotation_1.0_spec.version>
+    <geronimo-annotation_1.0_spec.version>1.1.1</geronimo-annotation_1.0_spec.version>
     <geronimo-interceptor_3.0_spec.version>1.0.1</geronimo-interceptor_3.0_spec.version>
     <weblogic.version>10.3</weblogic.version>
     <ojdbc6.version>11.1.0.7.0</ojdbc6.version>
-    <jaxb-impl.version>2.1.7</jaxb-impl.version>
+    <jaxb-impl.version>2.2.11</jaxb-impl.version>
     <gwt.version>2.4.0</gwt.version>
     <guice.version>3.0</guice.version>
     <gin.version>1.5.0</gin.version>
     <gwt-maven-plugin.version>2.2.0</gwt-maven-plugin.version>
-    <dozer.version>5.3.2</dozer.version>
+    <dozer.version>5.5.1</dozer.version>
   </properties>
 
   <dependencyManagement>
