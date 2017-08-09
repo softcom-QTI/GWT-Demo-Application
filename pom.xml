@@ -41,7 +41,12 @@
     <geronimo-interceptor_3.0_spec.version>1.0.1</geronimo-interceptor_3.0_spec.version>
     <weblogic.version>10.3</weblogic.version>
     <ojdbc6.version>11.1.0.7.0</ojdbc6.version>
+    <jaxws-tools.version>2.2.10</jaxws-tools.version>
+    <jax-ws-commons.jaxws-maven-plugin.version>2.3</jax-ws-commons.jaxws-maven-plugin.version>
+    <jaxb-api.version>2.2.12</jaxb-api.version>
+    <jaxws-api.version>2.2.12</jaxws-api.version>
     <jaxb-impl.version>2.2.11</jaxb-impl.version>
+    <ejb3-persistence.version>1.0.2.GA</ejb3-persistence.version>
     <gwt.version>2.4.0</gwt.version>
     <guice.version>3.0</guice.version>
     <gin.version>1.5.0</gin.version>
