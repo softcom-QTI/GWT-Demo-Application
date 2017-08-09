@@ -22,7 +22,6 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>${hibernate-entitymanager.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>javax.transaction</groupId>
@@ -43,25 +42,21 @@
 		<dependency>
 			<groupId>org.apache.geronimo.specs</groupId>
 			<artifactId>geronimo-ejb_3.0_spec</artifactId>
-			<version>${geronimo-ejb_3.0_spec.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.geronimo.specs</groupId>
 			<artifactId>geronimo-jpa_3.0_spec</artifactId>
-			<version>${geronimo-jpa_3.0_spec.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.geronimo.specs</groupId>
 			<artifactId>geronimo-jta_1.0.1B_spec</artifactId>
-			<version>${geronimo-jta_1.0.1B_spec.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.geronimo.specs</groupId>
 			<artifactId>geronimo-annotation_1.0_spec</artifactId>
-			<version>${geronimo-annotation_1.0_spec.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -69,19 +64,16 @@
 		<dependency>
 			<groupId>org.apache.openejb</groupId>
 			<artifactId>openejb-core</artifactId>
-			<version>${openejb.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.openejb</groupId>
 			<artifactId>openejb-client</artifactId>
-			<version>${openejb.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.dbunit</groupId>
 			<artifactId>dbunit</artifactId>
-			<version>${dbunit.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -89,7 +81,6 @@
 			<artifactId>testng</artifactId>
 			<scope>test</scope>
 			<classifier>jdk15</classifier>
-			<version>${testng.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.poi</groupId>
