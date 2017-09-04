@@ -66,11 +66,6 @@
   <dependencyManagement>
     <dependencies>
 	    <dependency>
-	      <groupId>pro.softcom.qt.demo</groupId>
-	      <artifactId>gwt-demo-application-ejb</artifactId>
-	      <version>${project.version}</version>
-	    </dependency>
-	    <dependency>
 	      <groupId>javax.transaction</groupId>
 	      <artifactId>jta</artifactId>
 	      <version>${jta.version}</version>
